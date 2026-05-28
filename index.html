@@ -377,8 +377,7 @@
                         {formData.authorName || ' '}
                       </h3>
                       <div className="text-xs text-gray-500 flex items-center mt-0.5">
-                        {formData.title && <span>{formData.title} • </span>}
-                        <span className={formData.title ? 'ml-1' : ''}>2h • </span>
+                        <span>2h • </span>
                         <span className="ml-1"><GlobeIcon /></span>
                       </div>
                     </div>
@@ -412,14 +411,40 @@
                   )}
                 </div>
 
+                {/* --- UPDATED: Image Container with Title Overlay --- */}
                 {formData.imageUrl && (
-                  <div className="w-full bg-gray-100">
+                  <div className="w-full bg-gray-100 relative flex items-center justify-center overflow-hidden">
                     <img 
                       src={formData.imageUrl} 
                       alt="Post attachment" 
                       className="w-full object-cover max-h-[500px]"
                       crossOrigin="anonymous" 
                     />
+                    
+                    {/* Render Title Overlay on top of image if Title is provided */}
+                    {formData.title && (
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center p-8">
+                        {/* Top Left Bracket Decoration */}
+                        <div className="absolute top-6 left-6 w-10 h-10 border-t border-l border-white/40"></div>
+                        
+                        {/* Center Text Layout with top/bottom lines */}
+                        <div className="relative flex flex-col items-center">
+                          {/* Top Decorative Line */}
+                          <div className="w-px h-10 bg-white/40 mb-3 relative">
+                            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white/70"></div>
+                          </div>
+                          
+                          <h2 className="text-white text-3xl md:text-4xl font-black italic text-center leading-tight tracking-wide drop-shadow-md whitespace-pre-wrap px-4">
+                            {formData.title}
+                          </h2>
+                          
+                          {/* Bottom Decorative Line */}
+                          <div className="w-px h-10 bg-white/40 mt-3 relative">
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-white/70"></div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
 
